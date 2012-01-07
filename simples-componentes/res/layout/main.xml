@@ -4,11 +4,17 @@
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
 
+	<ImageView
+		android:id="@+id/appIcon"
+		android:layout_height="wrap_content"
+		android:src="@drawable/icon"
+		android:layout_width="wrap_content"></ImageView>
+
 	<EditText 
-		android:id="@+form/text"
+		android:id="@+form/name"
 		android:layout_width="fill_parent" 
 		android:layout_height="wrap_content"
-		android:hint="Digite aqui"
+		android:hint="@string/form_name_hint"
 		android:inputType="text"
 		></EditText>
 		
@@ -19,7 +25,7 @@
 		android:layout_height="wrap_content"></Button>
 		
 	<TextView 
-		android:id="@+form/textView"
+		android:id="@+form/viewer"
 		android:layout_width="wrap_content" 
 		android:layout_height="fill_parent"></TextView>
 

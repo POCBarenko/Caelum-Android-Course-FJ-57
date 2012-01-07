@@ -2,4 +2,7 @@
 <resources>
     <string name="hello">Hello World, SimplesComponentes!</string>
     <string name="app_name">Simples Componentes</string>
+<string name="form_name_hint">Digite seu nome aqui</string>
+<string name="form_viewer_msg">&quot;Bem vindo %1$s!&quot;</string>
+
 </resources>
