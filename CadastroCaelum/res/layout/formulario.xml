@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:orientation="vertical">
+
+
+		<ImageButton android:layout_gravity="center_horizontal"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			src="@drawable/icon" android:id="@+formulario/foto"></ImageButton>
+
+		<TextView android:id="@+id/TextView01" android:text="Nome:"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+		<EditText android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:hint="Digite seu nome aqui"
+			android:id="@+formulario/nome"></EditText>
+
+		<TextView android:id="@+id/TextView03" android:layout_width="wrap_content"
+			android:text="Telefone:" android:layout_height="wrap_content"></TextView>
+		<EditText android:hint="Digite seu nome aqui"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:id="@+formulario/telefone"></EditText>
+
+		<TextView android:id="@+id/TextView04" android:layout_width="wrap_content"
+			android:text="Endereço:" android:layout_height="wrap_content"></TextView>
+		<EditText android:hint="Digite seu endereço aqui"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:id="@+formulario/endereco"></EditText>
+
+		<TextView android:id="@+id/TextView02" android:layout_width="wrap_content"
+			android:text="Site:" android:layout_height="wrap_content"></TextView>
+		<EditText android:hint="Digite seu site aqui"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:id="@+formulario/site"></EditText>
+
+		<TextView android:id="@+id/TextView05" android:layout_width="wrap_content"
+			android:text="Nota:" android:layout_height="wrap_content"></TextView>
+		<RatingBar android:layout_width="wrap_content"
+			android:layout_gravity="center_horizontal" android:layout_height="wrap_content"
+			android:numStars="5" android:id="@+formulario/nota"></RatingBar>
+
+		<Button android:text="Inserir" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:id="@+formulario/btn"></Button>
+	</LinearLayout>
+
+</ScrollView>
