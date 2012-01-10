@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
-    <string name="hello">Hello World, ListaAlunos!</string>
     <string name="app_name">Cadastro de Alunos</string>
+    <string name="form_name">Name:</string>
+    <string name="form_phone">Telefone:</string>
+    <string name="form_website">Site:</string>
+    <string name="form_rate">Nota:</string>
+    <string name="form_insert_btn">Inserir</string>
+    <string name="form_address">Endereço:</string>
+    <string name="form_name_hint">Digite seu nome aqui</string>
+    <string name="form_phone_hint">(99) 9999-9999</string>
+    <string name="form_address_hint">Digite seu endereço aqui</string>
+    <string name="form_website_hint">http://</string>
 </resources>

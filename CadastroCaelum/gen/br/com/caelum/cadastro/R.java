@@ -35,7 +35,16 @@ public final class R {
         public static final int lista=0x7f030001;
     }
     public static final class string {
-        public static final int app_name=0x7f040001;
-        public static final int hello=0x7f040000;
+        public static final int app_name=0x7f040000;
+        public static final int form_address=0x7f040006;
+        public static final int form_address_hint=0x7f040009;
+        public static final int form_insert_btn=0x7f040005;
+        public static final int form_name=0x7f040001;
+        public static final int form_name_hint=0x7f040007;
+        public static final int form_phone=0x7f040002;
+        public static final int form_phone_hint=0x7f040008;
+        public static final int form_rate=0x7f040004;
+        public static final int form_website=0x7f040003;
+        public static final int form_website_hint=0x7f04000a;
     }
 }
