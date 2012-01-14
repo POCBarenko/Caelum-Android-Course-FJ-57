@@ -139,7 +139,7 @@ public class ListaAlunos extends Activity {
 			break;
 		case 3:
 			Intent site = new Intent(Intent.ACTION_VIEW);
-			site.setData(Uri.parse("http:" + alunoSelecionado.getSite()));
+			site.setData(Uri.parse("http://" + alunoSelecionado.getSite()));
 			startActivity(site);
 			break;
 		case 4:
@@ -159,10 +159,20 @@ public class ListaAlunos extends Activity {
 					}).setNegativeButton("Não", null).show();
 			break;
 		case 5:
-			Toast.makeText(this, "Enviar email", Toast.LENGTH_SHORT).show();
+			Intent email = new Intent(Intent.ACTION_SEND);
+			email.setType("message/rfc822");
+			email.putExtra(Intent.EXTRA_EMAIL, new String[] {"caelum@caelum.com.br"});
+			email.putExtra(Intent.EXTRA_SUBJECT, new String[] {"Este é o titulo do email"});
+			email.putExtra(Intent.EXTRA_TEXT, new String[] {"Este é o conteudo do email"});
+			startActivity(Intent.createChooser(email, "Selecione a sua aplicação de email!"));
 			break;
 		case 6:
-			Toast.makeText(this, "Compartilhar", Toast.LENGTH_SHORT).show();
+			Intent social = new Intent(Intent.ACTION_SEND);
+			social.setType("text/plain");
+			social.putExtra(Intent.EXTRA_EMAIL, new String[] {"caelum@caelum.com.br"});
+			social.putExtra(Intent.EXTRA_SUBJECT, new String[] {"Este é o titulo"});
+			social.putExtra(Intent.EXTRA_TEXT, new String[] {"Este é o conteudol"});
+			startActivity(Intent.createChooser(social, "Selecione a sua aplicação de rede social!"));
 			break;
 		}
 		return super.onContextItemSelected(item);
@@ -174,6 +184,7 @@ public class ListaAlunos extends Activity {
 
 		AlunoDao dao = new AlunoDao(ListaAlunos.this);
 		final List<Aluno> alunos = dao.getAll();
+		dao.close();
 		ArrayAdapter<Aluno> adapter = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, alunos) {
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
