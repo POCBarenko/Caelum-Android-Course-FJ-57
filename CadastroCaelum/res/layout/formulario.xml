@@ -37,6 +37,7 @@
 
 		<EditText
 		    android:id="@+formulario/telefone"
+		    android:inputType="phone"
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
 		    android:hint="@string/form_phone_hint" >
@@ -66,6 +67,7 @@
 		<EditText
 		    android:id="@+formulario/site"
 		    android:layout_width="fill_parent"
+		    android:inputType="textWebEditText"
 		    android:layout_height="wrap_content"
 		    android:hint="@string/form_website_hint" >
 </EditText>

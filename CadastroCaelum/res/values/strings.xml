@@ -12,4 +12,5 @@
     <string name="form_phone_hint">(99) 9999-9999</string>
     <string name="form_address_hint">Digite seu endereço aqui</string>
     <string name="form_website_hint">http://</string>
+    <string name="item_photo_description">Foto do Aluno</string>
 </resources>

@@ -1,39 +1,43 @@
 package br.com.caelum.cadastro;
 
-import java.util.Arrays;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+import br.com.caelum.cadastro.dao.AlunoDao;
+import br.com.caelum.cadastro.modelo.Aluno;
 
 public class ListaAlunos extends Activity {
 	private ListView listaAlunos;
+	private Aluno alunoSelecionado;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.lista); // renderiza a tela
-
-		List<String> alunos = Arrays.asList("Cláudio", "André", "Rafael", "Benedita");
-
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, alunos);
-
-		loadListaAlunos(adapter);
-
 	}
 
-	private void loadListaAlunos(ArrayAdapter<String> adapter) {
+	private void loadListaAlunos(ArrayAdapter<Aluno> adapter) {
 		listaAlunos = (ListView) findViewById(R.id.listaAlunos);
 
 		listaAlunos.setAdapter(adapter);
@@ -42,7 +46,9 @@ public class ListaAlunos extends Activity {
 
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int posicao, long idPosicao) {
-				Toast.makeText(ListaAlunos.this, "Você clicou na posição " + posicao, Toast.LENGTH_SHORT).show();
+				Intent edicao = new Intent(ListaAlunos.this, Formulario.class);
+				edicao.putExtra("alunoSelecionado", (Aluno)listaAlunos.getItemAtPosition(posicao));
+				startActivity(edicao);
 			}
 		});
 
@@ -50,6 +56,7 @@ public class ListaAlunos extends Activity {
 
 			@Override
 			public boolean onItemLongClick(AdapterView<?> adapterView, View view, int posicao, long idPosicao) {
+				alunoSelecionado = (Aluno) adapterView.getItemAtPosition(posicao);
 				registerForContextMenu(listaAlunos);
 				return false; // true nao faz callback da classe (executa apenas o longClick).
 								// false faz callback (executa também o evento de click).
@@ -57,7 +64,7 @@ public class ListaAlunos extends Activity {
 		});
 	}
 
-	//Menu principal da aplicacao
+	// Menu principal da aplicacao
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuItem novo = menu.add(0, 0, 0, "Novo");
@@ -75,8 +82,7 @@ public class ListaAlunos extends Activity {
 		return super.onCreateOptionsMenu(menu);
 	}
 
-	
-	//implementacao do menu principal da aplicacao
+	// implementacao do menu principal da aplicacao
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -98,37 +104,59 @@ public class ListaAlunos extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	//submenu dos itens da aplicacao
+	// submenu dos itens da aplicacao
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-		menu.addSubMenu(0, 0, 0, "Ligar");
-		menu.addSubMenu(0, 1, 0, "Enviar SMS");
-		menu.addSubMenu(0, 2, 0, "Achar no Mapa");
-		menu.addSubMenu(0, 3, 0, "Navegar no Site");
-		menu.addSubMenu(0, 4, 0, "Excluir");
-		menu.addSubMenu(0, 5, 0, "Enviar email");
-		menu.addSubMenu(0, 6, 0, "Compartilhar");
+		menu.add(0, 0, 0, "Ligar");
+		menu.add(0, 1, 0, "Enviar SMS");
+		menu.add(0, 2, 0, "Achar no Mapa");
+		menu.add(0, 3, 0, "Navegar no Site");
+		menu.add(0, 4, 0, "Excluir");
+		menu.add(0, 5, 0, "Enviar email");
+		menu.add(0, 6, 0, "Compartilhar");
 		super.onCreateContextMenu(menu, v, menuInfo);
 	}
 
-	//implementacao dos itens do submenu da aplicacao
+	// implementacao dos itens do submenu da aplicacao
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case 0:
-			Toast.makeText(this, "Ligar", Toast.LENGTH_SHORT).show();
+			Intent ligar = new Intent(Intent.ACTION_CALL);
+			ligar.setData(Uri.parse("tel:" + alunoSelecionado.getTelefone()));
+			startActivity(ligar);
 			break;
 		case 1:
-			Toast.makeText(this, "Enviar SMS", Toast.LENGTH_SHORT).show();
+			Intent sms = new Intent(Intent.ACTION_VIEW);
+			sms.setData(Uri.parse("sms:" + alunoSelecionado.getTelefone()));
+			sms.putExtra("sms_body", "Mensagem sms padrão");
+			startActivity(sms);
 			break;
 		case 2:
-			Toast.makeText(this, "Achar no Mapa", Toast.LENGTH_SHORT).show();
+			Intent geo = new Intent(Intent.ACTION_VIEW);
+			geo.setData(Uri.parse("geo:0,0?z=17&q=" + alunoSelecionado.getEndereco()));
+			startActivity(geo);
 			break;
 		case 3:
-			Toast.makeText(this, "Navegar no Site", Toast.LENGTH_SHORT).show();
+			Intent site = new Intent(Intent.ACTION_VIEW);
+			site.setData(Uri.parse("http:" + alunoSelecionado.getSite()));
+			startActivity(site);
 			break;
 		case 4:
-			Toast.makeText(this, "Excluir", Toast.LENGTH_SHORT).show();
+			new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert).setTitle("Excluir").setMessage("Deseja excluir o aluno?")
+					.setPositiveButton("Claro!", new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							AlunoDao dao = new AlunoDao(ListaAlunos.this);
+							try {
+								dao.delete(alunoSelecionado);
+							} finally {
+								dao.close();
+							}
+							onResume();
+						}
+					}).setNegativeButton("Não", null).show();
 			break;
 		case 5:
 			Toast.makeText(this, "Enviar email", Toast.LENGTH_SHORT).show();
@@ -138,5 +166,57 @@ public class ListaAlunos extends Activity {
 			break;
 		}
 		return super.onContextItemSelected(item);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		AlunoDao dao = new AlunoDao(ListaAlunos.this);
+		final List<Aluno> alunos = dao.getAll();
+		ArrayAdapter<Aluno> adapter = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, alunos) {
+			@Override
+			public View getView(int position, View convertView, ViewGroup parent) {
+				Aluno aluno = alunos.get(position);
+
+				View view = ListaAlunos.this.getLayoutInflater().inflate(R.layout.item, null);
+
+				LinearLayout fundo = (LinearLayout) view.findViewById(R.item.fundo);
+				if (position % 2 == 0) {
+					fundo.setBackgroundColor(0xffff0000);
+				} else {
+					fundo.setBackgroundColor(0xff00ff00);
+				}
+
+				ImageView foto = (ImageView) view.findViewById(R.item.foto);
+				Bitmap bm = BitmapFactory.decodeResource(ListaAlunos.this.getResources(), R.drawable.icon);
+				if (aluno.getFoto() != null) {
+					bm = BitmapFactory.decodeFile(aluno.getFoto());
+				}
+				bm = Bitmap.createScaledBitmap(bm, 100, 100, true);
+				foto.setImageBitmap(bm);
+				TextView nome = (TextView) view.findViewById(R.item.nome);
+				nome.setText(aluno.toString());
+
+				return view;
+			}
+
+			@Override
+			public long getItemId(int position) {
+				return alunos.get(position).getId();
+			}
+
+			@Override
+			public int getCount() {
+				return super.getCount();
+			}
+
+			@Override
+			public Aluno getItem(int position) {
+				return alunos.get(position);
+			}
+		};
+		loadListaAlunos(adapter);
+
 	}
 }
