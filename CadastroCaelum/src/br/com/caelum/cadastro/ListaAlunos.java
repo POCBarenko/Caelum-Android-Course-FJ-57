@@ -67,16 +67,16 @@ public class ListaAlunos extends Activity {
 	// Menu principal da aplicacao
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuItem novo = menu.add(0, 0, 0, "Novo");
+		MenuItem novo = menu.add(0, 0, 0, R.string.menu_new);
 		novo.setIcon(android.R.drawable.ic_menu_add);
 
-		MenuItem sincronizar = menu.add(0, 1, 0, "Sincronizar");
+		MenuItem sincronizar = menu.add(0, 1, 0, R.string.menu_sycronize);
 		sincronizar.setIcon(android.R.drawable.ic_menu_rotate);
 
-		MenuItem galeria = menu.add(0, 2, 0, "Galeria");
+		MenuItem galeria = menu.add(0, 2, 0, R.string.menu_galery);
 		galeria.setIcon(android.R.drawable.ic_menu_camera);
 
-		MenuItem mapa = menu.add(0, 3, 0, "Mapa");
+		MenuItem mapa = menu.add(0, 3, 0, R.string.menu_map);
 		mapa.setIcon(android.R.drawable.ic_menu_mapmode);
 
 		return super.onCreateOptionsMenu(menu);
@@ -87,18 +87,18 @@ public class ListaAlunos extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case 0:
-			Toast.makeText(this, "Novo", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, R.string.menu_new, Toast.LENGTH_SHORT).show();
 			Intent novo = new Intent(this, Formulario.class);
 			startActivity(novo);
 			break;
 		case 1:
-			Toast.makeText(this, "Sincronizar", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, R.string.menu_sycronize, Toast.LENGTH_SHORT).show();
 			break;
 		case 2:
-			Toast.makeText(this, "Galeria", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, R.string.menu_galery, Toast.LENGTH_SHORT).show();
 			break;
 		case 3:
-			Toast.makeText(this, "Mapa", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, R.string.menu_map, Toast.LENGTH_SHORT).show();
 			break;
 		}
 		return super.onOptionsItemSelected(item);
@@ -107,13 +107,13 @@ public class ListaAlunos extends Activity {
 	// submenu dos itens da aplicacao
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-		menu.add(0, 0, 0, "Ligar");
-		menu.add(0, 1, 0, "Enviar SMS");
-		menu.add(0, 2, 0, "Achar no Mapa");
-		menu.add(0, 3, 0, "Navegar no Site");
-		menu.add(0, 4, 0, "Excluir");
-		menu.add(0, 5, 0, "Enviar email");
-		menu.add(0, 6, 0, "Compartilhar");
+		menu.addSubMenu(0, 0, 0, R.string.submenu_call);
+		menu.addSubMenu(0, 1, 0, R.string.submenu_sms);
+		menu.addSubMenu(0, 2, 0, R.string.submenu_find_map);
+		menu.addSubMenu(0, 3, 0, R.string.submenu_website);
+		menu.addSubMenu(0, 4, 0, R.string.submenu_remove);
+		menu.addSubMenu(0, 5, 0, R.string.submenu_send_email);
+		menu.addSubMenu(0, 6, 0, R.string.submenu_share);
 		super.onCreateContextMenu(menu, v, menuInfo);
 	}
 
