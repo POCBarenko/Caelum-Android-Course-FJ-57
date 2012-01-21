@@ -1,0 +1,11 @@
+JSON
+	json.org
+	GSon -> JSON do google
+
+Api p/ twitter: twitter4j
+
+Reflection
+	Utilize se melhorar legibilidade e der facilidade na implementacao
+	
+Android avisa aplicacao bloqueada por 5 segs
+	Se for broadcast, 10 segs

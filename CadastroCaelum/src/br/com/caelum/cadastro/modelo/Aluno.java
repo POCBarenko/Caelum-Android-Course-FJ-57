@@ -72,5 +72,4 @@ public class Aluno implements Serializable{
 	public String toString() {
 		return String.format("%s(%s)", getNome(), getId());
 	}
-
 }

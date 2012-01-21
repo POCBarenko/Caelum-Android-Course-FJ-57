@@ -8,19 +8,29 @@
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
 
     <application
         android:icon="@drawable/icon"
         android:label="@string/app_name" >
         <activity
             android:name=".tela.listaalunos.ListaAlunos"
+            android:configChanges="orientation|keyboardHidden|keyboard"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <receiver
+            android:name=".sms.SMSReceiver"
+            android:enabled="true" >
+            <intent-filter>
+                <intent-filter android:priority="2147483647" />
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
         <activity android:name=".tela.formulario.Formulario" >
         </activity>
         <activity android:name=".tela.galeria.Galeria" >

@@ -16,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,12 +23,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import br.com.caelum.cadastro.R;
-import br.com.caelum.cadastro.R.drawable;
-import br.com.caelum.cadastro.R.id;
-import br.com.caelum.cadastro.R.item;
-import br.com.caelum.cadastro.R.layout;
-import br.com.caelum.cadastro.R.string;
 import br.com.caelum.cadastro.dao.AlunoDao;
+import br.com.caelum.cadastro.helper.Sincronismo;
 import br.com.caelum.cadastro.modelo.Aluno;
 import br.com.caelum.cadastro.tela.formulario.Formulario;
 import br.com.caelum.cadastro.tela.galeria.Galeria;
@@ -48,28 +43,9 @@ public class ListaAlunos extends Activity {
 
 	private void loadListaAlunos(ArrayAdapter<Aluno> adapter) {
 
-		listaAlunos.setAdapter(adapter);
-
-		listaAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> adapterView, View view, int posicao, long idPosicao) {
-				Intent edicao = new Intent(ListaAlunos.this, Formulario.class);
-				edicao.putExtra("alunoSelecionado", (Aluno)listaAlunos.getItemAtPosition(posicao));
-				startActivity(edicao);
-			}
-		});
-
-		listaAlunos.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-
-			@Override
-			public boolean onItemLongClick(AdapterView<?> adapterView, View view, int posicao, long idPosicao) {
-				alunoSelecionado = (Aluno) adapterView.getItemAtPosition(posicao);
-				registerForContextMenu(listaAlunos);
-				return false; // true nao faz callback da classe (executa apenas o longClick).
-								// false faz callback (executa também o evento de click).
-			}
-		});
+		getListaAlunos().setAdapter(adapter);
+		getListaAlunos().setOnItemClickListener(new ListaAlunosEvents(this));
+		getListaAlunos().setOnItemLongClickListener(new ListaAlunosEvents(this));
 	}
 
 	// Menu principal da aplicacao
@@ -99,7 +75,7 @@ public class ListaAlunos extends Activity {
 			startActivity(novo);
 			break;
 		case 1:
-			Toast.makeText(this, R.string.menu_sycronize, Toast.LENGTH_SHORT).show();
+			new Sincronismo(this).sincronizar();
 			break;
 		case 2:
 			Intent galeria = new Intent(this, Galeria.class);
@@ -131,23 +107,23 @@ public class ListaAlunos extends Activity {
 		switch (item.getItemId()) {
 		case 0:
 			Intent ligar = new Intent(Intent.ACTION_CALL);
-			ligar.setData(Uri.parse("tel:" + alunoSelecionado.getTelefone()));
+			ligar.setData(Uri.parse("tel:" + getAlunoSelecionado().getTelefone()));
 			startActivity(ligar);
 			break;
 		case 1:
 			Intent sms = new Intent(Intent.ACTION_VIEW);
-			sms.setData(Uri.parse("sms:" + alunoSelecionado.getTelefone()));
+			sms.setData(Uri.parse("sms:" + getAlunoSelecionado().getTelefone()));
 			sms.putExtra("sms_body", "Mensagem sms padrão");
 			startActivity(sms);
 			break;
 		case 2:
 			Intent geo = new Intent(Intent.ACTION_VIEW);
-			geo.setData(Uri.parse("geo:0,0?z=17&q=" + alunoSelecionado.getEndereco()));
+			geo.setData(Uri.parse("geo:0,0?z=17&q=" + getAlunoSelecionado().getEndereco()));
 			startActivity(geo);
 			break;
 		case 3:
 			Intent site = new Intent(Intent.ACTION_VIEW);
-			site.setData(Uri.parse("http://" + alunoSelecionado.getSite()));
+			site.setData(Uri.parse("http://" + getAlunoSelecionado().getSite()));
 			startActivity(site);
 			break;
 		case 4:
@@ -158,7 +134,7 @@ public class ListaAlunos extends Activity {
 						public void onClick(DialogInterface dialog, int which) {
 							AlunoDao dao = new AlunoDao(ListaAlunos.this);
 							try {
-								dao.delete(alunoSelecionado);
+								dao.delete(getAlunoSelecionado());
 							} finally {
 								dao.close();
 							}
@@ -169,17 +145,17 @@ public class ListaAlunos extends Activity {
 		case 5:
 			Intent email = new Intent(Intent.ACTION_SEND);
 			email.setType("message/rfc822");
-			email.putExtra(Intent.EXTRA_EMAIL, new String[] {"caelum@caelum.com.br"});
-			email.putExtra(Intent.EXTRA_SUBJECT, new String[] {"Este é o titulo do email"});
-			email.putExtra(Intent.EXTRA_TEXT, new String[] {"Este é o conteudo do email"});
+			email.putExtra(Intent.EXTRA_EMAIL, new String[] { "caelum@caelum.com.br" });
+			email.putExtra(Intent.EXTRA_SUBJECT, new String[] { "Este é o titulo do email" });
+			email.putExtra(Intent.EXTRA_TEXT, new String[] { "Este é o conteudo do email" });
 			startActivity(Intent.createChooser(email, "Selecione a sua aplicação de email!"));
 			break;
 		case 6:
 			Intent social = new Intent(Intent.ACTION_SEND);
 			social.setType("text/plain");
-			social.putExtra(Intent.EXTRA_EMAIL, new String[] {"caelum@caelum.com.br"});
-			social.putExtra(Intent.EXTRA_SUBJECT, new String[] {"Este é o titulo"});
-			social.putExtra(Intent.EXTRA_TEXT, new String[] {"Este é o conteudol"});
+			social.putExtra(Intent.EXTRA_EMAIL, new String[] { "caelum@caelum.com.br" });
+			social.putExtra(Intent.EXTRA_SUBJECT, new String[] { "Este é o titulo" });
+			social.putExtra(Intent.EXTRA_TEXT, new String[] { "Este é o conteudol" });
 			startActivity(Intent.createChooser(social, "Selecione a sua aplicação de rede social!"));
 			break;
 		}
@@ -193,51 +169,22 @@ public class ListaAlunos extends Activity {
 		AlunoDao dao = new AlunoDao(ListaAlunos.this);
 		final List<Aluno> alunos = dao.getAll();
 		dao.close();
-		
-		ArrayAdapter<Aluno> adapter = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, alunos) {
-			@Override
-			public View getView(int position, View convertView, ViewGroup parent) {
-				Aluno aluno = alunos.get(position);
 
-				View view = ListaAlunos.this.getLayoutInflater().inflate(R.layout.item, null);
+		ArrayAdapter<Aluno> adapter = new ListaAlunosAdapter(this, android.R.layout.simple_list_item_1, alunos);
 
-				LinearLayout fundo = (LinearLayout) view.findViewById(R.item.fundo);
-				if (position % 2 == 0) {
-					fundo.setBackgroundColor(0xffff0000);
-				} else {
-					fundo.setBackgroundColor(0xff00ff00);
-				}
-
-				ImageView foto = (ImageView) view.findViewById(R.item.foto);
-				Bitmap bm = BitmapFactory.decodeResource(ListaAlunos.this.getResources(), R.drawable.icon);
-				if (aluno.getFoto() != null) {
-					bm = BitmapFactory.decodeFile(aluno.getFoto());
-				}
-				bm = Bitmap.createScaledBitmap(bm, 100, 100, true);
-				foto.setImageBitmap(bm);
-				TextView nome = (TextView) view.findViewById(R.item.nome);
-				nome.setText(aluno.toString());
-
-				return view;
-			}
-
-			@Override
-			public long getItemId(int position) {
-				return alunos.get(position).getId();
-			}
-
-			@Override
-			public int getCount() {
-				return super.getCount();
-			}
-
-			@Override
-			public Aluno getItem(int position) {
-				return alunos.get(position);
-			}
-		};
-		
 		loadListaAlunos(adapter);
-
 	}
+
+	public ListView getListaAlunos() {
+		return listaAlunos;
+	}
+
+	public Aluno getAlunoSelecionado() {
+		return alunoSelecionado;
+	}
+
+	public void setAlunoSelecionado(Aluno alunoSelecionado) {
+		this.alunoSelecionado = alunoSelecionado;
+	}
+
 }

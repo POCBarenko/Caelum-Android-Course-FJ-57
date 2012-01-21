@@ -97,4 +97,10 @@ public class AlunoDao extends SQLiteOpenHelper {
 			update(aluno);
 		}
 	}
+	
+	public boolean isAluno(String telefone) {
+		Cursor rawQuery = getReadableDatabase().rawQuery("SELECT telefone from "+ TABELA_ALUNO + " WHERE telefone like '%' ||?", new String[] {telefone});
+		int total = rawQuery.getCount();
+		return total > 0;
+	}
 }
