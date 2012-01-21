@@ -1,4 +1,4 @@
-package br.com.caelum.cadastro;
+package br.com.caelum.cadastro.tela.formulario;
 
 import java.io.File;
 
@@ -15,6 +15,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
+import br.com.caelum.cadastro.R;
+import br.com.caelum.cadastro.R.drawable;
+import br.com.caelum.cadastro.R.formulario;
+import br.com.caelum.cadastro.R.layout;
 import br.com.caelum.cadastro.dao.AlunoDao;
 import br.com.caelum.cadastro.modelo.Aluno;
 

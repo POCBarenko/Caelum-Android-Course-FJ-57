@@ -53,5 +53,16 @@ public final class R {
         public static final int form_website=0x7f040003;
         public static final int form_website_hint=0x7f04000a;
         public static final int item_photo_description=0x7f04000b;
+        public static final int menu_galery=0x7f04000e;
+        public static final int menu_map=0x7f04000f;
+        public static final int menu_new=0x7f04000c;
+        public static final int menu_sycronize=0x7f04000d;
+        public static final int submenu_call=0x7f040010;
+        public static final int submenu_find_map=0x7f040012;
+        public static final int submenu_remove=0x7f040014;
+        public static final int submenu_send_email=0x7f040015;
+        public static final int submenu_share=0x7f040016;
+        public static final int submenu_sms=0x7f040011;
+        public static final int submenu_website=0x7f040013;
     }
 }

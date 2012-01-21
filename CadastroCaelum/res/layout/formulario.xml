@@ -1,93 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent"
-		android:layout_height="fill_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
-	<LinearLayout android:layout_width="fill_parent"
-		android:layout_height="fill_parent" android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
 
-		<ImageButton
-		    android:id="@+formulario/foto"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_gravity="center_horizontal"
-		    android:src="@drawable/icon" >
-</ImageButton>
+        <ImageButton
+            android:id="@+formulario/foto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/icon" >
+        </ImageButton>
 
-		<TextView
-		    android:id="@+id/TextView01"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:text="@string/form_name" >
-</TextView>
+        <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/form_name" >
+        </TextView>
 
-		<EditText
-		    android:id="@+formulario/nome"
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:hint="@string/form_name_hint" >
+        <EditText
+            android:id="@+formulario/nome"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/form_name_hint"
+            android:singleLine="true" >
+        </EditText>
 
-</EditText>
+        <TextView
+            android:id="@+id/TextView03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/form_phone" >
+        </TextView>
 
-		<TextView
-		    android:id="@+id/TextView03"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:text="@string/form_phone" >
-</TextView>
+        <EditText
+            android:id="@+formulario/telefone"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/form_phone_hint"
+            android:inputType="phone"
+            android:singleLine="true" >
+        </EditText>
 
-		<EditText
-		    android:id="@+formulario/telefone"
-		    android:inputType="phone"
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:hint="@string/form_phone_hint" >
-</EditText>
+        <TextView
+            android:id="@+id/TextView04"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/form_address" >
+        </TextView>
 
-		<TextView
-		    android:id="@+id/TextView04"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:text="@string/form_address" >
-</TextView>
+        <EditText
+            android:id="@+formulario/endereco"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/form_address_hint"
+            android:singleLine="true" >
+        </EditText>
 
-		<EditText
-		    android:id="@+formulario/endereco"
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:hint="@string/form_address_hint" >
-</EditText>
+        <TextView
+            android:id="@+id/TextView02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/form_website" >
+        </TextView>
 
-		<TextView
-		    android:id="@+id/TextView02"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:text="@string/form_website" >
-</TextView>
+        <EditText
+            android:id="@+formulario/site"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/form_website_hint"
+            android:inputType="textWebEditText"
+            android:singleLine="true" >
+        </EditText>
 
-		<EditText
-		    android:id="@+formulario/site"
-		    android:layout_width="fill_parent"
-		    android:inputType="textWebEditText"
-		    android:layout_height="wrap_content"
-		    android:hint="@string/form_website_hint" >
-</EditText>
+        <TextView
+            android:id="@+id/TextView05"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/form_rate" >
+        </TextView>
 
-		<TextView
-		    android:id="@+id/TextView05"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:text="@string/form_rate" >
-</TextView>
-		<RatingBar android:layout_width="wrap_content"
-			android:layout_gravity="center_horizontal" android:layout_height="wrap_content"
-			android:numStars="5" android:id="@+formulario/nota"></RatingBar>
+        <RatingBar
+            android:id="@+formulario/nota"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:max="5"
+            android:numStars="5"
+            android:stepSize="1" >
 
-		<Button
-		    android:id="@+formulario/btn"
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:text="@string/form_insert_btn" >
-</Button>
-	</LinearLayout>
+        </RatingBar>
+
+        <Button
+            android:id="@+formulario/btn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/form_insert_btn" />
+    </LinearLayout>
 
 </ScrollView>

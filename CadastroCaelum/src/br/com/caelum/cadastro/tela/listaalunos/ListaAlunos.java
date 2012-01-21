@@ -1,4 +1,4 @@
-package br.com.caelum.cadastro;
+package br.com.caelum.cadastro.tela.listaalunos;
 
 import java.util.List;
 
@@ -23,8 +23,15 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import br.com.caelum.cadastro.R;
+import br.com.caelum.cadastro.R.drawable;
+import br.com.caelum.cadastro.R.id;
+import br.com.caelum.cadastro.R.item;
+import br.com.caelum.cadastro.R.layout;
+import br.com.caelum.cadastro.R.string;
 import br.com.caelum.cadastro.dao.AlunoDao;
 import br.com.caelum.cadastro.modelo.Aluno;
+import br.com.caelum.cadastro.tela.formulario.Formulario;
 
 public class ListaAlunos extends Activity {
 	private ListView listaAlunos;
@@ -35,10 +42,10 @@ public class ListaAlunos extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.lista); // renderiza a tela
+		listaAlunos = (ListView) findViewById(R.id.listaAlunos);
 	}
 
 	private void loadListaAlunos(ArrayAdapter<Aluno> adapter) {
-		listaAlunos = (ListView) findViewById(R.id.listaAlunos);
 
 		listaAlunos.setAdapter(adapter);
 
@@ -67,16 +74,16 @@ public class ListaAlunos extends Activity {
 	// Menu principal da aplicacao
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuItem novo = menu.add(0, 0, 0, R.string.menu_new);
+		MenuItem novo = menu.add(0, 0, Menu.NONE, R.string.menu_new);
 		novo.setIcon(android.R.drawable.ic_menu_add);
 
-		MenuItem sincronizar = menu.add(0, 1, 0, R.string.menu_sycronize);
+		MenuItem sincronizar = menu.add(0, 1, Menu.NONE, R.string.menu_sycronize);
 		sincronizar.setIcon(android.R.drawable.ic_menu_rotate);
 
-		MenuItem galeria = menu.add(0, 2, 0, R.string.menu_galery);
+		MenuItem galeria = menu.add(0, 2, Menu.NONE, R.string.menu_galery);
 		galeria.setIcon(android.R.drawable.ic_menu_camera);
 
-		MenuItem mapa = menu.add(0, 3, 0, R.string.menu_map);
+		MenuItem mapa = menu.add(0, 3, Menu.NONE, R.string.menu_map);
 		mapa.setIcon(android.R.drawable.ic_menu_mapmode);
 
 		return super.onCreateOptionsMenu(menu);
@@ -87,7 +94,6 @@ public class ListaAlunos extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case 0:
-			Toast.makeText(this, R.string.menu_new, Toast.LENGTH_SHORT).show();
 			Intent novo = new Intent(this, Formulario.class);
 			startActivity(novo);
 			break;
@@ -107,13 +113,13 @@ public class ListaAlunos extends Activity {
 	// submenu dos itens da aplicacao
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-		menu.addSubMenu(0, 0, 0, R.string.submenu_call);
-		menu.addSubMenu(0, 1, 0, R.string.submenu_sms);
-		menu.addSubMenu(0, 2, 0, R.string.submenu_find_map);
-		menu.addSubMenu(0, 3, 0, R.string.submenu_website);
-		menu.addSubMenu(0, 4, 0, R.string.submenu_remove);
-		menu.addSubMenu(0, 5, 0, R.string.submenu_send_email);
-		menu.addSubMenu(0, 6, 0, R.string.submenu_share);
+		menu.addSubMenu(Menu.NONE, 0, Menu.NONE, R.string.submenu_call);
+		menu.addSubMenu(Menu.NONE, 1, Menu.NONE, R.string.submenu_sms);
+		menu.addSubMenu(Menu.NONE, 2, Menu.NONE, R.string.submenu_find_map);
+		menu.addSubMenu(Menu.NONE, 3, Menu.NONE, R.string.submenu_website);
+		menu.addSubMenu(Menu.NONE, 4, Menu.NONE, R.string.submenu_remove);
+		menu.addSubMenu(Menu.NONE, 5, Menu.NONE, R.string.submenu_send_email);
+		menu.addSubMenu(Menu.NONE, 6, Menu.NONE, R.string.submenu_share);
 		super.onCreateContextMenu(menu, v, menuInfo);
 	}
 
@@ -185,6 +191,7 @@ public class ListaAlunos extends Activity {
 		AlunoDao dao = new AlunoDao(ListaAlunos.this);
 		final List<Aluno> alunos = dao.getAll();
 		dao.close();
+		
 		ArrayAdapter<Aluno> adapter = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, alunos) {
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
@@ -227,6 +234,7 @@ public class ListaAlunos extends Activity {
 				return alunos.get(position);
 			}
 		};
+		
 		loadListaAlunos(adapter);
 
 	}
