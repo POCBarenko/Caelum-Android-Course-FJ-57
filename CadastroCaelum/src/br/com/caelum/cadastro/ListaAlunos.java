@@ -95,7 +95,8 @@ public class ListaAlunos extends Activity {
 			Toast.makeText(this, "Sincronizar", Toast.LENGTH_SHORT).show();
 			break;
 		case 2:
-			Toast.makeText(this, "Galeria", Toast.LENGTH_SHORT).show();
+			Intent galeria = new Intent(this, Galeria.class);
+			startActivity(galeria);
 			break;
 		case 3:
 			Toast.makeText(this, "Mapa", Toast.LENGTH_SHORT).show();

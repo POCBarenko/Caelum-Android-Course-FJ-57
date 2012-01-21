@@ -23,6 +23,8 @@
         </activity>
         <activity android:name=".Formulario" >
         </activity>
+        <activity android:name=".Galeria" >
+        </activity>
     </application>
 
 </manifest>

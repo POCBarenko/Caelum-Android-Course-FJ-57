@@ -19,6 +19,7 @@ import br.com.caelum.cadastro.dao.AlunoDao;
 import br.com.caelum.cadastro.modelo.Aluno;
 
 public class Formulario extends Activity {
+	public static final String ALUNO_SELECIONADO = "alunoSelecionado";
 	private static final int PHOTO_CODE = 1234;
 	private Aluno aluno;
 
@@ -27,7 +28,7 @@ public class Formulario extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.formulario);
 
-		aluno = (Aluno) getIntent().getSerializableExtra("alunoSelecionado");
+		aluno = (Aluno) getIntent().getSerializableExtra(ALUNO_SELECIONADO);
 		if (aluno == null) {
 			aluno = new Aluno();
 		} else {

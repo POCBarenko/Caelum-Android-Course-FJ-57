@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <!--
+    unidade: 
+    	Utilizar dp para tamanhos;
+    	Utilizar sp para texto.
+     -->    
+    <Gallery 
+        android:id="@+galeria/galeria"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:padding="@dimen/galeria_padding"
+        android:spacing="@dimen/galeria_spacing"
+        />
+    
+</LinearLayout>
