@@ -21,8 +21,8 @@ public final class R {
         public static final int btn=0x7f070006;
         public static final int endereco=0x7f070003;
         public static final int foto=0x7f070000;
+        public static final int indicator=0x7f070005;
         public static final int nome=0x7f070001;
-        public static final int nota=0x7f070005;
         public static final int site=0x7f070004;
         public static final int telefone=0x7f070002;
     }

@@ -9,3 +9,16 @@ Reflection
 	
 Android avisa aplicacao bloqueada por 5 segs
 	Se for broadcast, 10 segs
+	
+	
+
+jbox2d - biblioteca de fisica 2d
+
+
+bluetooth     alcance	
+	classe 1  100m			
+	classe 2  10m			
+	classe 3  1m		
+	
+opengl
+	

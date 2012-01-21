@@ -6,19 +6,19 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
 import br.com.caelum.cadastro.R;
-import br.com.caelum.cadastro.R.drawable;
-import br.com.caelum.cadastro.R.formulario;
-import br.com.caelum.cadastro.R.layout;
+import br.com.caelum.cadastro.custom.Indicator;
 import br.com.caelum.cadastro.dao.AlunoDao;
 import br.com.caelum.cadastro.modelo.Aluno;
 
@@ -32,14 +32,20 @@ public class Formulario extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.formulario);
 
+		DisplayMetrics metrics = new DisplayMetrics();
+		 getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+		
 		aluno = (Aluno) getIntent().getSerializableExtra(ALUNO_SELECIONADO);
+		final Indicator indicator = (Indicator) findViewById(R.formulario.indicator);
 		if (aluno == null) {
 			aluno = new Aluno();
 		} else {
 			((EditText) findViewById(R.formulario.nome)).setText(aluno.getNome());
 			((EditText) findViewById(R.formulario.endereco)).setText(aluno.getEndereco());
 			// ((EditText) findViewById(R.formulario.foto)).setText(aluno.getFoto());
-			((RatingBar) findViewById(R.formulario.nota)).setRating(aluno.getNota().floatValue());
+		indicator.setLargura(metrics.widthPixels);
+			indicator.setValor(aluno.getNota().floatValue());
 			((EditText) findViewById(R.formulario.site)).setText(aluno.getSite());
 			((EditText) findViewById(R.formulario.telefone)).setText(aluno.getTelefone());
 			
@@ -56,7 +62,7 @@ public class Formulario extends Activity {
 				aluno.setNome(((EditText) findViewById(R.formulario.nome)).getText().toString());
 				aluno.setEndereco(((EditText) findViewById(R.formulario.endereco)).getText().toString());
 				// aluno.setFoto(((EditText) findViewById(R.formulario.foto)).getText().toString());
-				aluno.setNota((double) ((RatingBar) findViewById(R.formulario.nota)).getRating());
+				aluno.setNota((double) indicator.getValor());
 				aluno.setSite(((EditText) findViewById(R.formulario.site)).getText().toString());
 				aluno.setTelefone(((EditText) findViewById(R.formulario.telefone)).getText().toString());
 

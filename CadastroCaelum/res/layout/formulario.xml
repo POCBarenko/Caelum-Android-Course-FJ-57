@@ -85,17 +85,12 @@
             android:text="@string/form_rate" >
         </TextView>
 
-        <RatingBar
-            android:id="@+formulario/nota"
-            android:layout_width="wrap_content"
+        <br.com.caelum.cadastro.custom.Indicator
+            android:id="@+formulario/indicator"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:max="5"
-            android:numStars="5"
-            android:stepSize="1" >
-
-        </RatingBar>
-
+             />
+        
         <Button
             android:id="@+formulario/btn"
             android:layout_width="fill_parent"
