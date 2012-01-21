@@ -13,4 +13,15 @@
     <string name="form_address_hint">Digite seu endereço aqui</string>
     <string name="form_website_hint">http://</string>
     <string name="item_photo_description">Foto do Aluno</string>
+    <string name="menu_new">Novo</string>
+    <string name="menu_sycronize">Sincronizar</string>
+    <string name="menu_galery">Galeria</string>
+    <string name="menu_map">Mapa</string>
+    <string name="submenu_call">Ligar</string>
+    <string name="submenu_sms">Enviar SMS</string>
+    <string name="submenu_find_map">Achar no mapa</string>
+    <string name="submenu_website">Navegar no site</string>
+    <string name="submenu_remove">Excluir</string>
+    <string name="submenu_send_email">Enviar E-Mail</string>
+    <string name="submenu_share">Compartilhar</string>
 </resources>

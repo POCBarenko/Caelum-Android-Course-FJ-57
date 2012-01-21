@@ -1,7 +1,9 @@
-package br.com.caelum.cadastro;
+package br.com.caelum.cadastro.tela.galeria;
 
 import java.util.List;
 
+import br.com.caelum.cadastro.R;
+import br.com.caelum.cadastro.R.drawable;
 import br.com.caelum.cadastro.modelo.Aluno;
 
 import android.content.Context;
