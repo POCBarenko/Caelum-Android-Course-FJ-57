@@ -24,4 +24,7 @@
     <string name="submenu_remove">Excluir</string>
     <string name="submenu_send_email">Enviar E-Mail</string>
     <string name="submenu_share">Compartilhar</string>
+    <string name="ordemAlfabetica">Ordem alfabética</string>
+    <string name="btn_save">Salvar</string>
+    <string name="menu_preferences">Preferencias</string>
 </resources>

@@ -48,15 +48,21 @@ public final class R {
         public static final int item=0x7f030002;
         public static final int lista=0x7f030003;
         public static final int map_layout=0x7f030004;
+        public static final int preferencias=0x7f030005;
     }
     public static final class mapa {
         public static final int map_view=0x7f0b0000;
+    }
+    public static final class preferencias {
+        public static final int gravarPreferencias=0x7f0c0001;
+        public static final int ordemAlfabetica=0x7f0c0000;
     }
     public static final class raw {
         public static final int msg=0x7f040000;
     }
     public static final class string {
         public static final int app_name=0x7f060000;
+        public static final int btn_save=0x7f060018;
         public static final int form_address=0x7f060006;
         public static final int form_address_hint=0x7f060009;
         public static final int form_insert_btn=0x7f060005;
@@ -71,7 +77,9 @@ public final class R {
         public static final int menu_galery=0x7f06000e;
         public static final int menu_map=0x7f06000f;
         public static final int menu_new=0x7f06000c;
+        public static final int menu_preferences=0x7f060019;
         public static final int menu_sycronize=0x7f06000d;
+        public static final int ordemAlfabetica=0x7f060017;
         public static final int submenu_call=0x7f060010;
         public static final int submenu_find_map=0x7f060012;
         public static final int submenu_remove=0x7f060014;

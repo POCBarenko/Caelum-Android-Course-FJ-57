@@ -7,8 +7,11 @@ import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -23,6 +26,7 @@ import br.com.caelum.cadastro.modelo.Aluno;
 import br.com.caelum.cadastro.tela.formulario.Formulario;
 import br.com.caelum.cadastro.tela.galeria.Galeria;
 import br.com.caelum.cadastro.tela.map.Mapa;
+import br.com.caelum.cadastro.tela.preferencias.Preferencias;
 
 public class ListaAlunos extends Activity {
 	private ListView listaAlunos;
@@ -40,6 +44,7 @@ public class ListaAlunos extends Activity {
 			NotificationManager notMan = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 			notMan.cancel(notificationId);
 		}
+		
 	}
 
 	private void loadListaAlunos(ArrayAdapter<Aluno> adapter) {
@@ -64,6 +69,9 @@ public class ListaAlunos extends Activity {
 		MenuItem mapa = menu.add(0, 3, Menu.NONE, R.string.menu_map);
 		mapa.setIcon(android.R.drawable.ic_menu_mapmode);
 
+		MenuItem prefs = menu.add(0, 4, Menu.NONE, R.string.menu_preferences);
+		prefs.setIcon(android.R.drawable.ic_menu_preferences);
+		
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -85,6 +93,10 @@ public class ListaAlunos extends Activity {
 		case 3:
 			Intent mapa = new Intent(this, Mapa.class);
 			startActivity(mapa);
+			break;
+		case 4:
+			Intent prefs = new Intent(this, Preferencias.class);
+			startActivity(prefs);
 			break;
 		}
 		return super.onOptionsItemSelected(item);
@@ -169,7 +181,8 @@ public class ListaAlunos extends Activity {
 		super.onResume();
 
 		AlunoDao dao = new AlunoDao(ListaAlunos.this);
-		final List<Aluno> alunos = dao.getAll();
+		boolean ordenar = getSharedPreferences(Preferencias.PREFERENCIAS, MODE_PRIVATE).getBoolean(Preferencias.ORDENAR_ALFABETICAMENTE, false);
+		final List<Aluno> alunos = dao.getAll(ordenar);
 		dao.close();
 
 		ArrayAdapter<Aluno> adapter = new ListaAlunosAdapter(this, android.R.layout.simple_list_item_1, alunos);

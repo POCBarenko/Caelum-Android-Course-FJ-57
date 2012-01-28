@@ -39,6 +39,8 @@
         </activity>
         <activity android:name=".tela.map.Mapa">
         </activity>
+        <activity android:name=".tela.preferencias.Preferencias">
+        </activity>
 
         <uses-library android:name="com.google.android.maps"/>
     </application>

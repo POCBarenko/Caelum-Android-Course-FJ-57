@@ -50,11 +50,14 @@ public class AlunoDao extends SQLiteOpenHelper {
 	public void delete(Aluno aluno) {
 		getWritableDatabase().delete(TABELA_ALUNO, "ID=?", new String[] { aluno.getId().toString() });
 	}
-
 	public List<Aluno> getAll() {
+		return getAll(true);
+	}
+	public List<Aluno> getAll(boolean ordenar) {
 		List<Aluno> alunos = new ArrayList<Aluno>();
 		// Não deixa utilizar multiplos cursores, apenas um por vez na aplicação
-		Cursor c = getWritableDatabase().query(TABELA_ALUNO, null, null, null, null, null, "NOME ASC");
+		
+		Cursor c = getWritableDatabase().query(TABELA_ALUNO, null, null, null, null, null, (ordenar? "NOME ASC":null));
 		try {
 			while (c.moveToNext()) {
 				Aluno aluno = new Aluno();

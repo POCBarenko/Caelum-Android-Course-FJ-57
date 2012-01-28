@@ -27,7 +27,6 @@ public class ListaAlunosEvents implements AdapterView.OnItemLongClickListener, A
 		listaAlunos.registerForContextMenu(listaAlunos.getListaAlunos());
 		return false; // true nao faz callback da classe (executa apenas o longClick).
 						// false faz callback (executa também o evento de click).
-
 	}
 
 }

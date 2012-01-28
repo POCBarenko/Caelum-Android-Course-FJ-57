@@ -46,6 +46,14 @@ public class SMSReceiver extends BroadcastReceiver /* trata eventos assincronos 
 
 	private void notificar(Context context, String message) {
 		Notification notification = new Notification(R.drawable.icon, message, System.currentTimeMillis());
+
+		notification.vibrate = new long[] {0,100,200,300};
+		notification.ledARGB = 0xff00ff00;
+		notification.ledOnMS = 300;
+		notification.ledOffMS = 1000;
+		notification.flags = Notification.FLAG_SHOW_LIGHTS;
+		notification.defaults = Notification.DEFAULT_VIBRATE;
+		
 		
 		Intent listaAlunosIntent = new Intent(context, ListaAlunos.class);
 		listaAlunosIntent.putExtra("notificationId", NOTIFICATION_ID);
