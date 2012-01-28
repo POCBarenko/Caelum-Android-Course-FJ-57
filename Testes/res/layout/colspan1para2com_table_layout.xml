@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:stretchColumns="*" >
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        
+        <!-- precisa zerar width para nao contabilizar tamanho no layout_span -->
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="0dp" 
+            android:layout_height="wrap_content"
+            android:layout_span="1"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_span="2"
+            android:text="Button" />
+    </TableRow>
+
+</TableLayout>
