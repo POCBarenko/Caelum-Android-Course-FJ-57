@@ -4,10 +4,9 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -15,19 +14,15 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 import br.com.caelum.cadastro.R;
 import br.com.caelum.cadastro.dao.AlunoDao;
 import br.com.caelum.cadastro.helper.Sincronismo;
 import br.com.caelum.cadastro.modelo.Aluno;
 import br.com.caelum.cadastro.tela.formulario.Formulario;
 import br.com.caelum.cadastro.tela.galeria.Galeria;
+import br.com.caelum.cadastro.tela.map.Mapa;
 
 public class ListaAlunos extends Activity {
 	private ListView listaAlunos;
@@ -39,6 +34,12 @@ public class ListaAlunos extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.lista); // renderiza a tela
 		listaAlunos = (ListView) findViewById(R.id.listaAlunos);
+
+		int notificationId = getIntent().getIntExtra("notificationId", -1);
+		if(notificationId != -1) {
+			NotificationManager notMan = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+			notMan.cancel(notificationId);
+		}
 	}
 
 	private void loadListaAlunos(ArrayAdapter<Aluno> adapter) {
@@ -82,7 +83,8 @@ public class ListaAlunos extends Activity {
 			startActivity(galeria);
 			break;
 		case 3:
-			Toast.makeText(this, R.string.menu_map, Toast.LENGTH_SHORT).show();
+			Intent mapa = new Intent(this, Mapa.class);
+			startActivity(mapa);
 			break;
 		}
 		return super.onOptionsItemSelected(item);

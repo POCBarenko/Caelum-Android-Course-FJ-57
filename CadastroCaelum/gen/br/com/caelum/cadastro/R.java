@@ -47,6 +47,10 @@ public final class R {
         public static final int galeria=0x7f030001;
         public static final int item=0x7f030002;
         public static final int lista=0x7f030003;
+        public static final int map_layout=0x7f030004;
+    }
+    public static final class mapa {
+        public static final int map_view=0x7f0b0000;
     }
     public static final class raw {
         public static final int msg=0x7f040000;
